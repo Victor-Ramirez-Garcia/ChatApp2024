@@ -1,8 +1,12 @@
-import apiClient from "@/lib/api-client";
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import { Registration } from "../views/registration";
+let axios = require("axios");
+
+const apiClient = axios.create({
+    baseURL: "http://localhost:3000",
+});
 
 /**
  * Group tests under 'describe' block titled 'registration page'
