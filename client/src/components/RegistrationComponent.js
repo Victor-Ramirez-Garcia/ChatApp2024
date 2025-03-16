@@ -25,36 +25,41 @@ const RegistrationComponent = props => {
                                 <label for="firstName">First Name:</label>
                                 <input  type="text"
                                         name="firstName"
+                                        placeholder="firstName"
                                         value={firstName}
                                         onChange={e => setFirstName(e.target.value)} /><br />
                                 {firstNameErrors.map((err, key) => <p key={key}>{err}</p>)}
                                 <label for="lastName">Last Name:</label>
                                 <input  type="text"
                                         name="lastName"
+                                        placeholder="lastName"
                                         value={lastName}
                                         onChange={e => setLastName(e.target.value)} /><br />
                                 {lastNameErrors.map((err, key) => <p key={key}>{err}</p>)}
                                 <label for="email">Email:</label>
                                 <input  type="text"
                                         name="email"
+                                        placeholder="email"
                                         value={email}
                                         onChange={e => setEmail(e.target.value)} /><br />
                                 {emailErrors.map((err, key) => <p key={key}>{err}</p>)}
                                 <label for="password">Password:</label>
                                 <input  type="text"
                                         name="password"
+                                        placeholder="password"
                                         value={password}
                                         onChange={e => setPassword(e.target.value)} /><br />
                                 {passwordErrors.map((err, key) => <p key={key}>{err}</p>)}
                                 <label for="confirmPassword">Confirm Password:</label>
                                 <input  type="text"
                                         name="confirmPassword"
+                                        placeholder="confirmPassword"
                                         value={confirmPassword}
                                         onChange={e => setConfirmPassword(e.target.value)} />
                                 {confirmPasswordErrors.map((err, key) => <p key={key}>{err}</p>)}
 
                                 <button type={"button"} onClick={onClickHandler}>Go Back</button>
-                                <input type="submit" value="Register" />
+                                <input type="submit" placeholder="Register" value="Register" />
                         </form>
                 </>
         )
