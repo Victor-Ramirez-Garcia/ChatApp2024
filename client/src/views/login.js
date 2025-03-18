@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { LOGIN_ROUTE } from "../lib/constants";
+import apiClient from "../lib/api-client";
 import LoginComponent from '../components/LoginComponent';
 
 export function Login(props) {
@@ -12,7 +13,7 @@ export function Login(props) {
     const LoginHandler = (e, formInfo) => {
         e.preventDefault();
 
-        axios.post("http://localhost:8000/api/users/login", formInfo)
+        apiClient.post(LOGIN_ROUTE, formInfo)
         .then((user) => {
             setUser(user.data.user);
             navigate("/main");

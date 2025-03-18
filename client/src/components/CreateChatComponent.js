@@ -15,14 +15,16 @@ const CreateChatComponennt = props => {
     return (
         <>
             <form onSubmit={e => onSubmitHandler(e, {title, description})}>
-                <label for="title">Title:</label>
+                <label htmlFor="title">Title:</label>
                 <input  type="text"
+                        id="title"
                         name="title"
                         value={title}
                         onChange={e => setTitle(e.target.value)} /><br />
                 {titleErrors.map((err, key) => <p key={key}>{err}</p>)}
-                <label for="description">Description:</label>
+                <label htmlFor="description">Description:</label>
                 <input  type="text"
+                        id="description"
                         name="description"
                         value={description}
                         onChange={e => setDescription(e.target.value)} /><br />

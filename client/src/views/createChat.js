@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { CREATE_CHAT_ROUTE } from '../lib/constants';
+import apiClient from "../lib/api-client";
 import CreateChatComponent from '../components/CreateChatComponent';
 
 export function CreateChat(props) {
@@ -19,7 +20,7 @@ export function CreateChat(props) {
     const createChat = (e, formInfo) => {
         e.preventDefault();
         formInfo.user = user;
-        axios.post("http://localhost:8000/api/chats/create", formInfo)
+        apiClient.post(CREATE_CHAT_ROUTE, formInfo)
         .then(() => {
             navigate("/main");
         })

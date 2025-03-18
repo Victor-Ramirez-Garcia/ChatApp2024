@@ -15,14 +15,16 @@ const LoginComponent = props => {
         return (
         <>
             <form onSubmit={e => onSubmitHandler(e, {email, password})}>
-                <label for="email">Email:</label>
+                <label htmlFor="email">Email:</label>
                 <input  type="text"
+                        id="email"
                         name="email"
                         value={email}
                         onChange={e => setEmail(e.target.value)} /><br />
                 {emailErrors.map((err, key) => <p key={key}>{err}</p>)}
-                <label for="password">Password:</label>
+                <label htmlFor="password">Password:</label>
                 <input  type="text"
+                        id="password"
                         name="password"
                         value={password}
                         onChange={e => setPassword(e.target.value)} /><br />

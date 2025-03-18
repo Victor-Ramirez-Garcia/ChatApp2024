@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { UPDATE_ROUTE } from '../lib/constants';
+import apiClient from "../lib/api-client";
 import UpdateComponent from '../components/UpdateComponent';
 
 export function Update(props) {
@@ -13,7 +14,7 @@ export function Update(props) {
 
         formInfo.user = user._id; // Add user id to form info
 
-        axios.post("http://localhost:8000/api/users/update", formInfo)
+        apiClient.post(UPDATE_ROUTE, formInfo)
         .then((post_res) => {
             setUser(post_res.data.user);
             navigate("/main");

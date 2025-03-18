@@ -15,14 +15,16 @@ const UpdateComponent = props => {
     return (
         <>
             <form onSubmit={e => onSubmitHandler(e, {firstName, lastName})}>
-            <label for="firstName">First Name:</label>
+            <label htmlFor="firstName">First Name:</label>
             <input  type="text"
+                    id="firstName"
                     name="firstName"
                     value={firstName}
                     onChange={e => setFirstName(e.target.value)} /><br />
             {firstNameErrors.map((err, key) => <p key={key}>{err}</p>)}
-            <label for="lastName">Last Name:</label>
+            <label htmlFor="lastName">Last Name:</label>
             <input  type="text"
+                    id="lastName"
                     name="lastName"
                     value={lastName}
                     onChange={e => setLastName(e.target.value)} /><br />

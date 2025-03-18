@@ -6,11 +6,11 @@ const MessageComponent = props => {
     
     return (
         <>
-            <form onSubmit={(e) => onSendHandler(e, {content})}>
+            <form onSubmit={(e) => {onSendHandler(e, {content}); setContent("");}}>
                 <input  type="text"
                         name="content"
                         value={content}
-                        onChange={e => setContent(e.target.value)} /><br />
+                        onChange={e => {setContent(e.target.value);}} /><br />
                 
                 <input type="submit" value="Send" />
             </form>

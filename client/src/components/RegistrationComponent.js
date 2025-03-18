@@ -22,36 +22,41 @@ const RegistrationComponent = props => {
         return (
                 <>
                         <form onSubmit={e => onSubmitHandler(e, {firstName, lastName, email, password, confirmPassword})}>
-                                <label for="firstName">First Name:</label>
+                                <label htmlFor="firstName">First Name:</label>
                                 <input  type="text"
+                                        id="firstName"
                                         name="firstName"
                                         placeholder="firstName"
                                         value={firstName}
                                         onChange={e => setFirstName(e.target.value)} /><br />
                                 {firstNameErrors.map((err, key) => <p key={key}>{err}</p>)}
-                                <label for="lastName">Last Name:</label>
+                                <label htmlFor="lastName">Last Name:</label>
                                 <input  type="text"
+                                        id="lastName"
                                         name="lastName"
                                         placeholder="lastName"
                                         value={lastName}
                                         onChange={e => setLastName(e.target.value)} /><br />
                                 {lastNameErrors.map((err, key) => <p key={key}>{err}</p>)}
-                                <label for="email">Email:</label>
+                                <label htmlFor="email">Email:</label>
                                 <input  type="text"
+                                        id="email"
                                         name="email"
                                         placeholder="email"
                                         value={email}
                                         onChange={e => setEmail(e.target.value)} /><br />
                                 {emailErrors.map((err, key) => <p key={key}>{err}</p>)}
-                                <label for="password">Password:</label>
+                                <label htmlFor="password">Password:</label>
                                 <input  type="text"
+                                        id="password"
                                         name="password"
                                         placeholder="password"
                                         value={password}
                                         onChange={e => setPassword(e.target.value)} /><br />
                                 {passwordErrors.map((err, key) => <p key={key}>{err}</p>)}
-                                <label for="confirmPassword">Confirm Password:</label>
+                                <label htmlFor="confirmPassword">Confirm Password:</label>
                                 <input  type="text"
+                                        id="confirmPassword"
                                         name="confirmPassword"
                                         placeholder="confirmPassword"
                                         value={confirmPassword}
@@ -59,7 +64,7 @@ const RegistrationComponent = props => {
                                 {confirmPasswordErrors.map((err, key) => <p key={key}>{err}</p>)}
 
                                 <button type={"button"} onClick={onClickHandler}>Go Back</button>
-                                <input type="submit" placeholder="Register" value="Register" />
+                                <input type="submit" value="Register" />
                         </form>
                 </>
         )

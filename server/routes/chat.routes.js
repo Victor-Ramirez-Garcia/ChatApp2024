@@ -8,7 +8,7 @@ module.exports = app => {
     app.get("/api/chats/all/exclude/:user", ChatController.getAllNonUserChats);
     // Gets all ":user" chat rooms
     app.get("/api/chats/:user", ChatController.getAllUserChats);
-    // Get ":chat" chat room by id
+    // Get ":chat" chat room posts by chat id
     app.get("/api/chats/posts/:chat", ChatController.getChatPostsById);
     // Delete ":chat" chat room
     app.delete("/api/chats/delete/:chat", ChatController.deleteChatById);
