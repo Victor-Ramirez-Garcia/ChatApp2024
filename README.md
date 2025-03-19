@@ -42,6 +42,8 @@ cd server
 npm install
 ```
 
+4. Note: If server does not want to work, go to **server/config/mongoose.config.js** file, and change the connection of the "database" variable to your database.
+
 # Usage
 1. **Start the server** (Server will run at http://localhost:8000)
 ```bash
