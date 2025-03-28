@@ -2,6 +2,8 @@ import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import ChatButtonComponent from '../components/ChatButtonComponent';
+import { CHAT_ROOMS_ROUTE, USER_ROUTE } from '../lib/constants';
+import apiClient from '../lib/api-client';
 
 export function Main(props) {
     const { user } = props; // Properties given by the component
@@ -17,12 +19,14 @@ export function Main(props) {
 
     // Get all non-user chats
     const getNonUserChats = useCallback(async() => {
-        const res = await axios.get(`http://localhost:8000/api/chats/all/exclude/${user._id}`);
+        const res = await apiClient.get(`${CHAT_ROOMS_ROUTE}${user._id}`);
+        console.log(res);
 
         // Replaces user id with user object
         const resChats = Object.keys(res.data.chats).map((key) => 
-            axios.get(`http://localhost:8000/api/users/${res.data.chats[key].user}`)
+            apiClient.get(`${USER_ROUTE}${res.data.chats[key].user}`)
             .then((res_user) => {
+                console.log(res_user);
                 // When we console log res_user, data.user is an array,
                 // in here, we only want the object
                 res.data.chats[key].user = res_user.data.user[0];
