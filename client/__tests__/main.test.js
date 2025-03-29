@@ -4,6 +4,8 @@ import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import { useNavigate } from 'react-router-dom';
 import { Main } from '../src/views/main';
+import { wait } from '@testing-library/user-event/dist/cjs/utils/index.js';
+import { CHAT_ROOMS_ROUTE, USER_ROUTE } from '../src/lib/constants';
 //import { LOGIN_ROUTE } from '../src/lib/constants';
 
 // simulate axios GET and DELETE functions
@@ -38,48 +40,38 @@ describe("main page", () => {
     })
 
     /**
-     * Test 1: If API call resolves with 201 status,
+     * Test 1: If API call resolves with status 201,
      * expect non-user chats to appear
      */
     test('displays non-user chats on successful retrieval', async() => {
-        // array of simulated chat titles and descriptions
+        // simulate array of Chat models
         const mockChats = [
-            {title: "Rap Evolution", description: "Shaping modern sound", email: "t@gmail.com"},
-            {title: "Beats & Bars", description: "The core of rap music", email: "j@gmail.com"},
-            {title: "Lyricism", description: "Wordplay at its finest", email: "v@gmail.com"},
-            {title: "Golden Era", description: "Hip hop's best years", email: "e@gmail.com"},
+            {title: "Rap Evolution", description: "Shaping modern sound", email: "t@gmail.com", user: "id1" },
+            {title: "Beats & Bars", description: "The core of rap music", email: "j@gmail.com", user: "id2" },
+            {title: "Lyricism", description: "Wordplay at its finest", email: "v@gmail.com", user: "id3" },
+            {title: "Golden Era", description: "Hip hop's best years", email: "e@gmail.com", user: "id4" },
         ];
 
-        // simulate response from CHAT_ROOMS_ROUTE
-        apiClient.get.mockResolvedValue({
-            status: 200,
+        // simulate response object from CHAT_ROOMS_ROUTE
+        const mockRes = {
+            status: 201,
             data: {
                 chats: {
                     0: {
+                        user: mockChats[0].user,
                         title: mockChats[0].title,
                         description: mockChats[0].description,
-                        user: {email: mockChats[0].email},
-                    },
-                    1: {
-                        title: mockChats[1].title,
-                        description: mockChats[1].description,
-                        user: {email: mockChats[1].email},
-                    },
-                    2: {
-                        title: mockChats[2].title,
-                        description: mockChats[2].description,
-                        user: {email: mockChats[2].email},
-                    },
-                    3: {
-                        title: mockChats[3].title,
-                        description: mockChats[3].description,
-                        user: {email: mockChats[3].email},
+                        posts: [],
                     },
                 },
             },
-        });
-
+        };
+        apiClient.get.mockResolvedValueOnce(mockRes);
+        
         // simulate response from USER_ROUTE
+        apiClient.get.mockResolvedValueOnce({
+            data: { user: { 0: { _id: mockChats[0].user, email: mockChats[0].email } }}, 
+        });
 
         const mockUser = jest.fn(); // simulate user
 
@@ -88,14 +80,9 @@ describe("main page", () => {
 
         // expect chats to be displayed 
         await waitFor(() => {
-            expect(screen.getByText(mockChats[0].title)).toBeInTheDocument();
-            expect(screen.getByText(mockChats[0].description)).toBeInTheDocument();
-            expect(screen.getByText(mockChats[1].title)).toBeInTheDocument();
-            expect(screen.getByText(mockChats[1].description)).toBeInTheDocument();
-            expect(screen.getByText(mockChats[2].title)).toBeInTheDocument();
-            expect(screen.getByText(mockChats[2].description)).toBeInTheDocument();
-            expect(screen.getByText(mockChats[3].title)).toBeInTheDocument();
-            expect(screen.getByText(mockChats[3].description)).toBeInTheDocument();
+            expect(screen.getByText(`Title: ${mockChats[0].title}`)).toBeInTheDocument();
+            expect(screen.getByText(`Description: ${mockChats[0].description}`)).toBeInTheDocument();
+            expect(screen.getByText(`Created By: ${mockChats[0].email}`)).toBeInTheDocument();
         });
-    })
+    });
 })

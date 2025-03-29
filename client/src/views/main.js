@@ -20,20 +20,17 @@ export function Main(props) {
     // Get all non-user chats
     const getNonUserChats = useCallback(async() => {
         const res = await apiClient.get(`${CHAT_ROOMS_ROUTE}${user._id}`);
-        console.log(res);
 
         // Replaces user id with user object
         const resChats = Object.keys(res.data.chats).map((key) => 
             apiClient.get(`${USER_ROUTE}${res.data.chats[key].user}`)
             .then((res_user) => {
-                console.log(res_user);
                 // When we console log res_user, data.user is an array,
                 // in here, we only want the object
                 res.data.chats[key].user = res_user.data.user[0];
                 return res.data.chats[key];
             })
         );
-
         const chatsArr = await Promise.all(resChats);
         setChats(chatsArr);
     }, [user._id, setChats]);
